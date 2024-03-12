@@ -23,51 +23,26 @@
 //     }
 // }
 
-using System;
+// uusing System;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Ввод значений m и n
-        Console.Write("Введите число m: ");
-        int m = ParseNonNegativeInt(Console.ReadLine());
+        // Произвольный массив
+        int[] array = {1, 2, 5, 0, 10, 34 };
 
-        Console.Write("Введите число n: ");
-        int n = ParseNonNegativeInt(Console.ReadLine());
-
-        // Вычисление и вывод значения функции Аккермана
-        Console.WriteLine($"Значение функции Аккермана для m = {m} и n = {n}: {AckermannFunction(m, n)}");
+        Console.WriteLine("Элементы массива, начиная с конца:");
+        PrintArrayReverse(array, array.Length - 1); // Вызов рекурсивной функции для вывода элементов массива
     }
 
-    // Пользовательская функция для парсинга неотрицательного целого числа из строки
-    static int ParseNonNegativeInt(string input)
+    // Рекурсивная функция для вывода элементов массива, начиная с конца
+    static void PrintArrayReverse(int[] array, int index)
     {
-        int result;
-        if (!int.TryParse(input, out result) || result < 0)
+        if (index >= 0)
         {
-            Console.WriteLine("Ошибка ввода. Введите неотрицательное целое число.");
-            Environment.Exit(1);
-        }
-        return result;
-    }
-
-    // Рекурсивная функция для вычисления функции Аккермана
-    static int AckermannFunction(int m, int n)
-    {
-        if (m == 1)
-        {
-            return n + 1;
-        }
-        else if (n == 1)
-        {
-            return AckermannFunction(m - 1, 1);
-        }
-        else
-        {
-            return AckermannFunction(m - 1, AckermannFunction(m, n - 1));
+            Console.WriteLine(array[index]); // Выводим текущий элемент
+            PrintArrayReverse(array, index - 1); // Рекурсивно вызываем функцию для предыдущего индекса
         }
     }
 }
-
-
